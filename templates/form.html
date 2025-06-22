@@ -153,7 +153,7 @@
     <div><label for="birth_date">Birth Date:</label><input type="date" name="birth_date" id="birth_date" required></div>
     <div><label for="birth_time">Birth Time:</label><input type="time" name="birth_time" id="birth_time" step="1" required></div>
     <div><label for="birth_city">Birth City:</label><input type="text" id="birth_city"></div>
-    <div><label>&nbsp;</label><button type="button" onclick="lookupCity('birth_city','latitude','longitude')">Look Up Location</button></div>
+    <div><label>&nbsp;</label><button type="button" class="lookup-btn" onclick="lookupCity('birth_city','latitude','longitude')">Look Up Location</button></div>
     <div><label for="latitude">Latitude:</label><input type="text" name="latitude" id="latitude" required></div>
     <div><label for="longitude">Longitude:</label><input type="text" name="longitude" id="longitude" required></div>
 
@@ -161,11 +161,11 @@
     <div><label for="compare_date">Compare Date:</label><input type="date" name="compare_date" id="compare_date" required></div>
     <div><label for="compare_time">Compare Time:</label><input type="time" name="compare_time" id="compare_time" step="1" required></div>
     <div><label for="compare_city">Compare City:</label><input type="text" id="compare_city"></div>
-    <div><label>&nbsp;</label><button type="button" onclick="lookupCity('compare_city','compare_latitude','compare_longitude')">Look Up Location</button></div>
+    <div><label>&nbsp;</label><button type="button" class="lookup-btn" onclick="lookupCity('compare_city','compare_latitude','compare_longitude')">Look Up Location</button></div>
     <div><label for="compare_latitude">Compare Latitude:</label><input type="text" name="compare_latitude" id="compare_latitude" required></div>
     <div><label for="compare_longitude">Compare Longitude:</label><input type="text" name="compare_longitude" id="compare_longitude" required></div>
     <div><label>&nbsp;</label>
-      <button type="button" class="generate-btn" onclick="fillTransits()">Compare with Current Transits</button>
+      <button type="button" class="lookup-btn" onclick="fillTransits()">Compare with Current Transits</button>
     </div>
 
     <button type="submit" class="transit-btn">Generate Report</button>

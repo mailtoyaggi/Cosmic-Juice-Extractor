@@ -1,8 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
 
-body, input, button, select, textarea {
+/* Apply Playfair Display to major text elements, Segoe UI (or similar) for body text for readability */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* A more common, clean font for readability */
+}
+
+h1, summary, .explanation { /* Apply Playfair Display to headings and specific elements */
   font-family: 'Playfair Display', serif;
 }
+
+/* Ensure consistent font for form inputs/buttons where appropriate */
+input, select, textarea {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+button {
+  font-family: 'Playfair Display', serif; /* Buttons often look good with a heading font */
+}
+
 
 body {
   background: #FFFBEA; /* Softer, creamy lemon yellow */
@@ -63,78 +77,78 @@ label {
   color: #4a4a4a; /* Consistent label color */
 }
 
-input, select, button[type="button"] {
+/* INPUTS and SELECTS */
+input, select {
   padding: 0.75rem; /* Increased padding for better tap targets */
   font-size: 1rem; /* Slightly larger font size */
   border: 1px solid #ccc;
   border-radius: 8px; /* Slightly more rounded */
-  background: #fffef9;
+  background: #fffef9; /* Light background for inputs/selects */
+  box-sizing: border-box; /* Ensure padding is included in element's total width/height */
 }
 
 /* ========== Buttons ========== */
 
-button[type="submit"],
-.generate-btn { /* Apply these styles to both main action buttons */
-  background-color: #DAA520; /* Goldenrod - main primary action color */
+/* Base styles for ALL buttons to reset browser defaults and provide a consistent foundation */
+button {
+  padding: 0.75rem 1.2rem; /* Default padding for all buttons */
+  font-size: 1rem; /* Default font size for all buttons */
+  border: none; /* Remove default button border */
+  border-radius: 8px; /* Default border radius for all buttons */
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  box-sizing: border-box;
+  background-color: #e0e0e0; /* A neutral light grey default to ensure visibility */
+  color: #333; /* Default text color for buttons */
+}
+
+/* PRIMARY ACTION BUTTON ("Generate Report") */
+/* This style now exclusively applies to the submit button. */
+button[type="submit"] {
+  background-color: #DAA520; /* Goldenrod - primary action color */
   color: white;
   font-weight: bold;
-  padding: 14px 24px;
-  font-size: 1.25rem; /* Slightly larger font for main actions */
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.2s ease;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Consistent shadow for primary buttons */
+  padding: 14px 24px; /* Larger padding for primary buttons */
+  font-size: 1.25rem; /* Larger font for primary buttons */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-button[type="submit"] {
-  grid-column: 1 / -1;
-  justify-self: center;
-  margin-top: 1.5rem; /* More margin */
-}
-
-.generate-btn:hover,
 button[type="submit"]:hover {
   background-color: #C2931D; /* Darker goldenrod on hover */
   transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.15);
 }
 
-.generate-btn:active,
 button[type="submit"]:active {
   background-color: #B0851B; /* Even darker on active */
   transform: translateY(0);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-.transit-btn, /* This was the "Generate Report" button in your old HTML, but now it's "Compare with current transits" */
-.lookup-btn { /* Group lookup and transit buttons for consistent styling */
-  background-color: #ffe58b; /* Original lighter yellow for secondary actions */
+
+/* SECONDARY ACTION BUTTONS (e.g., "Look Up Location", "Compare with Current Transits") */
+/* These buttons will be the lighter yellow. */
+.lookup-btn {
+  background-color: #ffe58b; /* Lighter yellow for secondary actions */
   font-weight: bold;
   color: #333;
-  padding: 0.6rem 1rem; /* Slightly more padding */
-  font-size: 0.95rem; /* Consistent smaller font */
+  padding: 0.6rem 1rem;
+  font-size: 0.95rem;
   border: 1px solid #d1a000;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.25s ease;
-  margin-top: 0.5rem; /* Add margin to separate from input */
 }
 
-.transit-btn:hover,
 .lookup-btn:hover {
   background-color: #ffdd66;
+  transform: translateY(-1px);
 }
 
-.transit-btn:active,
 .lookup-btn:active {
   background-color: #f2c744;
-}
-
-/* Specific styles for location lookup button in the form grid */
-form div button[type="button"] { /* Target 'Look Up Location' buttons */
-    margin-top: 1.5rem; /* Push it down a bit to align */
+  transform: translateY(0);
 }
 
 
+/* Specific styles for copy and download buttons - seem good as they are */
 .copy-section-btn {
   font-size: 0.85rem;
   padding: 6px 10px;
@@ -142,7 +156,6 @@ form div button[type="button"] { /* Target 'Look Up Location' buttons */
   top: 12px;
   right: 16px;
   background-color: #69b84d; /* Green */
-  border: none;
   color: white;
   border-radius: 6px;
   cursor: pointer;
@@ -162,7 +175,6 @@ form div button[type="button"] { /* Target 'Look Up Location' buttons */
   text-align: center;
   margin: 1.5rem auto 2.5rem auto; /* More vertical margin */
   color: white;
-  border: none;
   border-radius: 6px;
   cursor: pointer;
   transition: background 0.2s ease;
@@ -173,6 +185,21 @@ form div button[type="button"] { /* Target 'Look Up Location' buttons */
 }
 
 /* ========== Layout ========== */
+
+/* Ensure submit button maintains its grid positioning */
+button[type="submit"] {
+  grid-column: 1 / -1;
+  justify-self: center;
+  margin-top: 1.5rem; /* More margin */
+}
+
+/* Adjustments for location lookup button alignment in the form grid */
+/* This will apply to both "Look Up Location" and "Compare with Current Transits" if they have class="lookup-btn" */
+form div .lookup-btn { /* Target buttons with .lookup-btn inside a form div */
+    margin-top: 1.5rem; /* Push it down a bit to align with inputs */
+    width: 100%; /* Make sure these buttons fill their column on smaller screens */
+}
+
 
 textarea {
   width: 100%;
@@ -265,13 +292,14 @@ pre {
     margin-bottom: 0.75rem;
   }
 
-  input, select, button[type="button"], .transit-btn, .lookup-btn {
-    padding: 0.6rem; /* Slightly less padding for inputs/secondary buttons */
-    font-size: 0.9rem; /* Smaller font for inputs/secondary buttons */
+  /* This combines input/select with primary/secondary buttons and makes them responsive */
+  input, select, .lookup-btn { /* Removed .generate-btn as it's now .lookup-btn */
+    padding: 0.6rem; /* Slightly less padding for inputs/buttons */
+    font-size: 0.9rem; /* Smaller font for inputs/buttons */
   }
-  
-  .generate-btn, /* Compare with Current Transits */
-  button[type="submit"] { /* Generate Report */
+
+  /* Ensure primary buttons are full width on mobile */
+  button[type="submit"] { /* Only submit button is primary now */
     padding: 12px 20px; /* Adjust padding for main buttons */
     font-size: 1.1rem; /* Adjust font size for main buttons */
     width: 100%; /* Make them full width on mobile */
@@ -279,7 +307,7 @@ pre {
     margin-left: auto; /* Center block elements */
     margin-right: auto;
   }
-  
+
   .copy-section-btn {
     top: 8px;
     right: 8px; /* Closer to the corner */
@@ -314,7 +342,7 @@ pre {
     h1 {
         font-size: 1.8rem;
     }
-    .generate-btn, button[type="submit"] {
+    button[type="submit"] { /* Only submit button is primary now */
         padding: 10px 15px;
         font-size: 1rem;
     }
