@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cosmic Juice Extractor</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+  <style>
+    body, input, button, select, textarea {
+      font-family: 'Playfair Display', serif;
+    }
+
+    body {
+      background: #fffdf4;
+      margin: 0;
+      padding: 2rem;
+    }
+
+    h1 {
+      text-align: center;
+      color: #e0b000;
+    }
+
+    .explanation {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 1rem auto;
+      font-size: 1rem;
+      color: #4a4a4a;
+    }
+
+    form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem 2rem;
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: #fefce8;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    }
+
+    form h3 {
+      grid-column: 1 / -1;
+      color: #336600;
+      font-size: 1.2rem;
+      border-bottom: 1px solid #eddc95;
+      padding-bottom: 0.4rem;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    input, button[type="button"] {
+      width: 100%;
+      padding: 8px;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    button[type="submit"],
+    .copy-section-btn,
+    .download-button,
+    .transit-btn {
+      background: #e0b000;
+      color: white;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    button[type="submit"] {
+      grid-column: 1 / -1;
+      justify-self: center;
+      margin-top: 1rem;
+      padding: 10px 20px;
+    }
+
+    .copy-section-btn {
+      font-size: 0.85rem;
+      padding: 6px 10px;
+      position: absolute;
+      top: 12px;
+      right: 16px;
+    }
+
+    .download-button {
+      display: block;
+      margin: 2rem auto;
+      padding: 10px 16px;
+      font-size: 1rem;
+      width: 220px;
+    }
+
+    .transit-btn {
+      margin-top: 0.5rem;
+      padding: 8px 12px;
+      width: 100%;
+    }
+
+    details {
+      max-width: 900px;
+      margin: 1.5rem auto;
+      background: #ffffff;
+      border: 1px solid #eee0a0;
+      border-left: 6px solid #e0b000;
+      border-radius: 8px;
+      padding: 0.75rem 1.25rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+      position: relative;
+    }
+
+    summary {
+      font-weight: bold;
+      font-size: 1.05rem;
+      cursor: pointer;
+      color: #336600;
+      margin-bottom: 0.5rem;
+    }
+
+    pre {
+      white-space: pre-wrap;
+      font-family: monospace;
+      font-size: 0.95rem;
+      margin-top: 0.5rem;
+    }
+
+    @media (max-width: 768px) {
+      form {
+        grid-template-columns: 1fr;
+      }
+      .copy-section-btn {
+        top: 8px;
+        right: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Cosmic Juice Extractor</h1>
+
+  <p class="explanation">
+    This tool generates a structured sidereal astrology report—birth charts, composite summaries, dashas, and compatibility—arranged in collapsible, copyable sections perfect for GPT analysis or your own insights.
+  </p>
+
+  <form method="POST">
+    <h3>Person A (Birth Details)</h3>
+    <div><label for="birth_date">Birth Date:</label><input type="date" name="birth_date" id="birth_date" required></div>
+    <div><label for="birth_time">Birth Time:</label><input type="time" name="birth_time" id="birth_time" step="1" required></div>
+    <div><label for="birth_city">Birth City:</label><input type="text" id="birth_city"></div>
+    <div><label>&nbsp;</label><button type="button" onclick="lookupCity('birth_city','latitude','longitude')">Look Up Location</button></div>
+    <div><label for="latitude">Latitude:</label><input type="text" name="latitude" id="latitude" required></div>
+    <div><label for="longitude">Longitude:</label><input type="text" name="longitude" id="longitude" required></div>
+
+    <h3>Person B (Comparison Details)</h3>
+    <div><label for="compare_date">Compare Date:</label><input type="date" name="compare_date" id="compare_date" required></div>
+    <div><label for="compare_time">Compare Time:</label><input type="time" name="compare_time" id="compare_time" step="1" required></div>
+    <div><label for="compare_city">Compare City:</label><input type="text" id="compare_city"></div>
+    <div><label>&nbsp;</label><button type="button" onclick="lookupCity('compare_city','compare_latitude','compare_longitude')">Look Up Location</button></div>
+    <div><label for="compare_latitude">Compare Latitude:</label><input type="text" name="compare_latitude" id="compare_latitude" required></div>
+    <div><label for="compare_longitude">Compare Longitude:</label><input type="text" name="compare_longitude" id="compare_longitude" required></div>
+    <div><label>&nbsp;</label>
+      <button type="button" class="generate-btn" onclick="fillTransits()">Compare with Current Transits</button>
+    </div>
+
+    <button type="submit" class="transit-btn">Generate Report</button>
+  </form>
+
+  {% if result_sections %}
+    <details>
+      <summary>Person A: Birth Chart</summary>
+      <button class="copy-section-btn" onclick="copySection('section-a')">Copy</button>
+      <pre id="section-a">{{ result_sections.birth_chart_a }}</pre>
+    </details>
+    <details>
+      <summary>Person B: Birth Chart</summary>
+      <button class="copy-section-btn" onclick="copySection('section-b')">Copy</button>
+      <pre id="section-b">{{ result_sections.birth_chart_b }}</pre>
+    </details>
+    <details>
+      <summary>Composite Chart Summary</summary>
+      <button class="copy-section-btn" onclick="copySection('section-composite')">Copy</button>
+      <pre id="section-composite">{{ result_sections.composite_summary }}</pre>
+    </details>
+    <details>
+      <summary>Sidereal Dashas & Return Ages</summary>
+      <button class="copy-section-btn" onclick="copySection('section-dashas')">Copy</button>
+      <pre id="section-dashas">{{ result_sections.dashas }}</pre>
+    </details>
+    <details>
+      <summary>Compatibility Insights</summary>
+      <button class="copy-section-btn" onclick="copySection('section-compat')">Copy</button>
+      <pre id="section-compat">{{ result_sections.compatibility }}</pre>
+    </details>
+    <button class="download-button" onclick="copyAll()">Copy Full Report</button>
+  {% endif %}
+
+  <script>
+    function lookupCity(cityId, latId, lonId) {
+      const city = document.getElementById(cityId).value.trim();
+      if (!city) return showToast("Please enter a city.");
+      const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(city)}`;
+      fetch(url)
+        .then(res => res.json())
+        .then(data => {
+          if (data.length === 0) return showToast("City not found.");
+          document.getElementById(latId).value = data[0].lat;
+          document.getElementById(lonId).value = data[0].lon;
+        })
+        .catch(() => showToast("Error finding location."));
+    }
+
+    function copySection(id) {
+      const el = document.getElementById(id);
+      navigator.clipboard.writeText(el.textContent.trim()).then(() => {
+        showToast("Section copied to clipboard.");
+      });
+    }
+
+    function copyAll() {
+      const sections = document.querySelectorAll("pre");
+      let text = "";
+      sections.forEach(el => {
+        text += el.textContent.trim() + "\n\n";
+      });
+      navigator.clipboard.writeText(text).then(() => {
+        showToast("Full report copied to clipboard.");
+      });
+    }
+
+    function fillTransits() {
+      const now = new Date();
+      const dateStr = now.toISOString().slice(0, 10);         // e.g. "2025-06-21"
+      const timeStr = now.toTimeString().slice(0, 8);          // e.g. "18:45:00"
+
+      const latA = document.getElementById('latitude').value.trim();
+      const lonA = document.getElementById('longitude').value.trim();
+
+      if (!latA || !lonA) {
+        showToast("Please fill in Person A's location first.");
+        return;
+      }
+
+      // Autofill Person B's fields
+      document.getElementById('compare_date').value = dateStr;
+      document.getElementById('compare_time').value = timeStr;
+      document.getElementById('compare_latitude').value = latA;
+      document.getElementById('compare_longitude').value = lonA;
+
+      // Optional visual cue
+      ['compare_date', 'compare_time', 'compare_latitude', 'compare_longitude'].forEach(id => {
+        const el = document.getElementById(id);
+        el.style.transition = 'background-color 0.3s ease';
+        el.style.backgroundColor = '#fff3aa';
+        setTimeout(() => { el.style.backgroundColor = ''; }, 900);
+      });
+
+      showToast("Fields prefilled with current transits using Person A's location.");
+    }
+  </script>
+    <!-- Toast container -->
+    <div id="toast" class="toast"></div>
+
+    <style>
+    .toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #4caf50;
+    color: #fff;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 1000;
+    }
+    .toast.show {
+    opacity: 1;
+    }
+    </style>
+
+    <script>
+    function showToast(message, color = "#4caf50") {
+    const toast = document.getElementById("toast");
+    toast.textContent = message;
+    toast.style.backgroundColor = color;
+    toast.classList.add("show");
+    setTimeout(() => {
+        toast.classList.remove("show");
+    }, 2200);
+    }
+    </script>
+</body>
+</html>

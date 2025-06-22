@@ -1,0 +1,7 @@
+Flask==3.1.0
+Jinja2==3.1.6
+pytz
+pyswisseph
+beautifulsoup4
+requests
+gunicorn

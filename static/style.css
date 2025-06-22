@@ -1,0 +1,244 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
+
+body, input, button, select, textarea {
+  font-family: 'Playfair Display', serif;
+}
+
+body {
+  background: #fffdf4;
+  color: #2c3e50;
+  margin: 0;
+  padding: 2rem;
+}
+
+h1 {
+  text-align: center;
+  color: #e0b000;
+}
+
+.explanation {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 1rem auto;
+  font-size: 1rem;
+  color: #4a4a4a;
+}
+
+form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem 2rem;
+  max-width: 900px;
+  margin: auto;
+  padding: 2rem;
+  background: #fefce8;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+form h3 {
+  grid-column: 1 / -1;
+  margin-top: 1.2rem;
+  font-size: 1.1rem;
+  border-bottom: 1px solid #eddc95;
+  padding-bottom: 0.5rem;
+  color: #336600;
+}
+
+form div {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 0.4rem;
+  font-size: 0.95rem;
+}
+
+input, select, button[type="button"] {
+  padding: 0.5rem;
+  font-size: 0.95rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #fffef9;
+}
+
+/* ========== Buttons ========== */
+
+button[type="submit"] {
+  grid-column: 1 / -1;
+  justify-self: center;
+  margin-top: 1rem;
+}
+
+.generate-btn {
+  background-color: #e0b000;
+  color: white;
+  font-weight: bold;
+  padding: 14px 24px;
+  font-size: 1.15rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.generate-btn:hover {
+  background-color: #d1a300;
+}
+
+.transit-btn {
+  background-color: #ffe58b;
+  font-weight: bold;
+  color: #333;
+  padding: 8px;
+  font-size: 0.9rem;
+  border: 1px solid #d1a000;
+  border-radius: 6px;
+  width: 100%;
+  cursor: pointer;
+  transition: background-color 0.25s ease;
+}
+
+.transit-btn:hover {
+  background-color: #ffdd66;
+}
+
+.lookup-btn {
+  background-color: #ffe58b;
+  font-weight: bold;
+  color: #333;
+  padding: 8px;
+  font-size: 0.9rem;
+  border: 1px solid #d1a000;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.25s ease;
+}
+
+.lookup-btn:hover {
+  background-color: #ffdd66;
+}
+
+.lookup-btn:active {
+  background-color: #f2c744;
+}
+
+.copy-section-btn {
+  font-size: 0.85rem;
+  padding: 6px 10px;
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  background-color: #69b84d;
+  border: none;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.copy-section-btn:hover {
+  background: #58a03e;
+}
+
+.download-button {
+  display: block;
+  background: #69b84d;
+  padding: 10px 16px;
+  font-size: 1rem;
+  width: 200px;
+  text-align: center;
+  margin: 1rem auto 2rem auto;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.download-button:hover {
+  background: #58a03e;
+}
+
+/* ========== Layout ========== */
+
+textarea {
+  width: 100%;
+  max-width: 900px;
+  height: 360px;
+  margin: 2rem auto;
+  display: block;
+  font-family: monospace;
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background: #fefce8;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+details {
+  max-width: 900px;
+  margin: 1.5rem auto;
+  background: #ffffff;
+  border: 1px solid #eee0a0;
+  border-left: 6px solid #e0b000;
+  border-radius: 8px;
+  padding: 0.75rem 1.25rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+  position: relative;
+}
+
+summary {
+  font-weight: bold;
+  font-size: 1.05rem;
+  cursor: pointer;
+  color: #336600;
+  margin-bottom: 0.5rem;
+}
+
+pre {
+  white-space: pre-wrap;
+  font-family: monospace;
+  font-size: 0.95rem;
+  margin-top: 0.5rem;
+}
+
+/* ========== Toast ========== */
+
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #4caf50;
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 1000;
+}
+
+.toast.show {
+  opacity: 1;
+}
+
+/* ========== Responsive ========== */
+
+@media (max-width: 768px) {
+  form {
+    grid-template-columns: 1fr;
+  }
+
+  .copy-section-btn {
+    top: 8px;
+    right: 12px;
+  }
+
+  textarea {
+    width: 100%;
+  }
+}
