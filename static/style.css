@@ -5,44 +5,50 @@ body, input, button, select, textarea {
 }
 
 body {
-  background: #fffdf4;
+  background: #FFFBEA; /* Softer, creamy lemon yellow */
   color: #2c3e50;
   margin: 0;
-  padding: 2rem;
+  padding: 2rem; /* Will be adjusted for mobile via media query */
+  line-height: 1.6; /* Improve readability */
 }
 
 h1 {
   text-align: center;
-  color: #e0b000;
+  color: #DAA520; /* Goldenrod - a richer, less bright gold */
+  margin-bottom: 1.5rem; /* Ensure spacing */
+  font-size: 2.5rem; /* Default for desktop */
 }
 
 .explanation {
   text-align: center;
   max-width: 700px;
-  margin: 0 auto 1rem auto;
-  font-size: 1rem;
+  margin: 0 auto 1.5rem auto; /* Slightly more margin */
+  font-size: 1.1rem; /* Slightly larger for better readability */
   color: #4a4a4a;
+  padding: 0 1rem; /* Add some horizontal padding to prevent text touching edges on small screens */
 }
 
 form {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1rem 2rem;
+  gap: 1.5rem 2rem; /* Slightly more gap for spacing */
   max-width: 900px;
-  margin: auto;
-  padding: 2rem;
+  margin: 2rem auto; /* Adjust top margin for spacing */
+  padding: 2.5rem; /* Slightly more padding inside form */
   background: #fefce8;
   border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1); /* Slightly stronger shadow */
 }
 
 form h3 {
   grid-column: 1 / -1;
-  margin-top: 1.2rem;
-  font-size: 1.1rem;
+  margin-top: 0.5rem; /* Adjust margin */
+  margin-bottom: 1rem; /* Space below heading */
+  font-size: 1.3rem; /* Slightly larger heading for form sections */
   border-bottom: 1px solid #eddc95;
-  padding-bottom: 0.5rem;
-  color: #336600;
+  padding-bottom: 0.6rem; /* More padding below line */
+  color: #336600; /* Dark green for section headings */
+  text-align: center; /* Center section headings */
 }
 
 form div {
@@ -52,78 +58,82 @@ form div {
 
 label {
   font-weight: bold;
-  margin-bottom: 0.4rem;
-  font-size: 0.95rem;
+  margin-bottom: 0.5rem; /* More space below label */
+  font-size: 1rem; /* Slightly larger label font */
+  color: #4a4a4a; /* Consistent label color */
 }
 
 input, select, button[type="button"] {
-  padding: 0.5rem;
-  font-size: 0.95rem;
+  padding: 0.75rem; /* Increased padding for better tap targets */
+  font-size: 1rem; /* Slightly larger font size */
   border: 1px solid #ccc;
-  border-radius: 6px;
+  border-radius: 8px; /* Slightly more rounded */
   background: #fffef9;
 }
 
 /* ========== Buttons ========== */
 
-button[type="submit"] {
-  grid-column: 1 / -1;
-  justify-self: center;
-  margin-top: 1rem;
-}
-
-.generate-btn {
-  background-color: #e0b000;
+button[type="submit"],
+.generate-btn { /* Apply these styles to both main action buttons */
+  background-color: #DAA520; /* Goldenrod - main primary action color */
   color: white;
   font-weight: bold;
   padding: 14px 24px;
-  font-size: 1.15rem;
+  font-size: 1.25rem; /* Slightly larger font for main actions */
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Consistent shadow for primary buttons */
 }
 
-.generate-btn:hover {
-  background-color: #d1a300;
+button[type="submit"] {
+  grid-column: 1 / -1;
+  justify-self: center;
+  margin-top: 1.5rem; /* More margin */
 }
 
-.transit-btn {
-  background-color: #ffe58b;
+.generate-btn:hover,
+button[type="submit"]:hover {
+  background-color: #C2931D; /* Darker goldenrod on hover */
+  transform: translateY(-2px);
+}
+
+.generate-btn:active,
+button[type="submit"]:active {
+  background-color: #B0851B; /* Even darker on active */
+  transform: translateY(0);
+}
+
+.transit-btn, /* This was the "Generate Report" button in your old HTML, but now it's "Compare with current transits" */
+.lookup-btn { /* Group lookup and transit buttons for consistent styling */
+  background-color: #ffe58b; /* Original lighter yellow for secondary actions */
   font-weight: bold;
   color: #333;
-  padding: 8px;
-  font-size: 0.9rem;
-  border: 1px solid #d1a000;
-  border-radius: 6px;
-  width: 100%;
-  cursor: pointer;
-  transition: background-color 0.25s ease;
-}
-
-.transit-btn:hover {
-  background-color: #ffdd66;
-}
-
-.lookup-btn {
-  background-color: #ffe58b;
-  font-weight: bold;
-  color: #333;
-  padding: 8px;
-  font-size: 0.9rem;
+  padding: 0.6rem 1rem; /* Slightly more padding */
+  font-size: 0.95rem; /* Consistent smaller font */
   border: 1px solid #d1a000;
   border-radius: 6px;
   cursor: pointer;
   transition: background-color 0.25s ease;
+  margin-top: 0.5rem; /* Add margin to separate from input */
 }
 
+.transit-btn:hover,
 .lookup-btn:hover {
   background-color: #ffdd66;
 }
 
+.transit-btn:active,
 .lookup-btn:active {
   background-color: #f2c744;
 }
+
+/* Specific styles for location lookup button in the form grid */
+form div button[type="button"] { /* Target 'Look Up Location' buttons */
+    margin-top: 1.5rem; /* Push it down a bit to align */
+}
+
 
 .copy-section-btn {
   font-size: 0.85rem;
@@ -131,11 +141,12 @@ button[type="submit"] {
   position: absolute;
   top: 12px;
   right: 16px;
-  background-color: #69b84d;
+  background-color: #69b84d; /* Green */
   border: none;
   color: white;
   border-radius: 6px;
   cursor: pointer;
+  transition: background 0.2s ease;
 }
 
 .copy-section-btn:hover {
@@ -144,16 +155,17 @@ button[type="submit"] {
 
 .download-button {
   display: block;
-  background: #69b84d;
+  background: #69b84d; /* Green */
   padding: 10px 16px;
   font-size: 1rem;
-  width: 200px;
+  width: 220px; /* Slightly wider for better mobile tap */
   text-align: center;
-  margin: 1rem auto 2rem auto;
+  margin: 1.5rem auto 2.5rem auto; /* More vertical margin */
   color: white;
   border: none;
   border-radius: 6px;
   cursor: pointer;
+  transition: background 0.2s ease;
 }
 
 .download-button:hover {
@@ -182,19 +194,19 @@ details {
   margin: 1.5rem auto;
   background: #ffffff;
   border: 1px solid #eee0a0;
-  border-left: 6px solid #e0b000;
+  border-left: 6px solid #DAA520; /* Goldenrod for left border */
   border-radius: 8px;
-  padding: 0.75rem 1.25rem;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+  padding: 1rem 1.5rem; /* Slightly more padding */
+  box-shadow: 0 3px 8px rgba(0,0,0,0.06); /* Softer shadow */
   position: relative;
 }
 
 summary {
   font-weight: bold;
-  font-size: 1.05rem;
+  font-size: 1.1rem; /* Slightly larger summary font */
   cursor: pointer;
   color: #336600;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem; /* More space below summary */
 }
 
 pre {
@@ -205,7 +217,7 @@ pre {
 }
 
 /* ========== Toast ========== */
-
+/* Keep your toast styles as they are, they are fine */
 .toast {
   position: fixed;
   bottom: 24px;
@@ -226,19 +238,84 @@ pre {
   opacity: 1;
 }
 
-/* ========== Responsive ========== */
+/* ========== Responsive Adjustments (Mobile) ========== */
 
 @media (max-width: 768px) {
-  form {
-    grid-template-columns: 1fr;
+  body {
+    padding: 1rem; /* Reduced padding on body for smaller screens */
   }
 
+  h1 {
+    font-size: 2rem; /* Smaller heading on mobile */
+  }
+
+  .explanation {
+    font-size: 0.95rem; /* Smaller explanation text */
+    margin-bottom: 1rem;
+  }
+
+  form {
+    grid-template-columns: 1fr; /* Single column on mobile */
+    padding: 1.5rem; /* Less padding inside form on mobile */
+    margin: 1rem auto; /* Less margin around form on mobile */
+  }
+
+  form h3 {
+    font-size: 1.1rem; /* Smaller section heading on mobile */
+    margin-bottom: 0.75rem;
+  }
+
+  input, select, button[type="button"], .transit-btn, .lookup-btn {
+    padding: 0.6rem; /* Slightly less padding for inputs/secondary buttons */
+    font-size: 0.9rem; /* Smaller font for inputs/secondary buttons */
+  }
+  
+  .generate-btn, /* Compare with Current Transits */
+  button[type="submit"] { /* Generate Report */
+    padding: 12px 20px; /* Adjust padding for main buttons */
+    font-size: 1.1rem; /* Adjust font size for main buttons */
+    width: 100%; /* Make them full width on mobile */
+    max-width: 300px; /* Optional: cap width on slightly larger phones */
+    margin-left: auto; /* Center block elements */
+    margin-right: auto;
+  }
+  
   .copy-section-btn {
     top: 8px;
-    right: 12px;
+    right: 8px; /* Closer to the corner */
+    padding: 5px 8px; /* Smaller copy button */
+    font-size: 0.8rem;
   }
 
-  textarea {
-    width: 100%;
+  .download-button {
+    width: 180px; /* Slightly smaller download button */
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    margin: 1rem auto 1.5rem auto;
   }
+
+  details {
+    padding: 0.6rem 1rem; /* Less padding inside details */
+    margin: 1rem auto; /* Less margin around details */
+  }
+
+  summary {
+    font-size: 1rem; /* Smaller summary font */
+    margin-bottom: 0.5rem;
+  }
+
+  pre {
+    font-size: 0.85rem; /* Smaller code text */
+  }
+}
+
+/* Smallest screens (e.g., old iPhone SE) */
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.8rem;
+    }
+    .generate-btn, button[type="submit"] {
+        padding: 10px 15px;
+        font-size: 1rem;
+    }
 }
