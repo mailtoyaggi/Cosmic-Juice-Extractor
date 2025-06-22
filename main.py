@@ -947,11 +947,11 @@ def run_astrology_report(birth_date, birth_time, latitude, longitude,
     dashas_a = get_vimshottari_dashas(raw_positions1['Moon'], birth_dt_obj)
 
     # Return Ages A
-    now_julian = swe.julday(datetime.utcnow().year, datetime.utcnow().month, datetime.utcnow().day)
-    y, m, d = map(int, birth_date_utc.split('/'))
-    h, mi, s = map(float, birth_time_utc.split(':'))
-    decimal_hour = h + mi / 60 + s / 3600
-    birth_julian = swe.julday(y, m, d, decimal_hour)
+    # now_julian = swe.julday(datetime.utcnow().year, datetime.utcnow().month, datetime.utcnow().day)
+    # y, m, d = map(int, birth_date_utc.split('/'))
+    # h, mi, s = map(float, birth_time_utc.split(':'))
+    # decimal_hour = h + mi / 60 + s / 3600
+    # birth_julian = swe.julday(y, m, d, decimal_hour)
 
     returns_a = io.StringIO()
     returns_a.write("Dashas for Person A:\n")
@@ -960,17 +960,17 @@ def run_astrology_report(birth_date, birth_time, latitude, longitude,
         for antar, s, e in antars:
             returns_a.write(f"  - {antar}: {s.date()} to {e.date()}\n")
 
-    returns_a.write("\nPlanetary Return Ages:\n")
-    planet_table = [("Moon", swe.MOON, 0.05, 13), ("Mercury", swe.MERCURY, 0.02, 30),
-                    ("Venus", swe.VENUS, 0.02, 30), ("Sun", swe.SUN, 0.01, 45),
-                    ("Mars", swe.MARS, 0.02, 20), ("Jupiter", swe.JUPITER, 0.02, 15),
-                    ("Saturn", swe.SATURN, 0.01, 10), ("Uranus", swe.URANUS, 0.01, 5),
-                    ("Neptune", swe.NEPTUNE, 0.01, 5), ("Pluto", swe.PLUTO, 0.01, 5),
-                    ("Rahu", swe.TRUE_NODE, 0.02, 8)]
-    for name, pid, orb, cooldown in planet_table:
-        ret = calculate_return_age(pid, raw_positions1[name], birth_julian, now_julian, orb, cooldown)
-        returns_a.write(f"{name}: {ret:.2f} returns\n")
-    returns_a.write(f"Ketu: {ret:.2f} returns\n")
+    # returns_a.write("\nPlanetary Return Ages:\n")
+    # planet_table = [("Moon", swe.MOON, 0.05, 13), ("Mercury", swe.MERCURY, 0.02, 30),
+    #                 ("Venus", swe.VENUS, 0.02, 30), ("Sun", swe.SUN, 0.01, 45),
+    #                 ("Mars", swe.MARS, 0.02, 20), ("Jupiter", swe.JUPITER, 0.02, 15),
+    #                 ("Saturn", swe.SATURN, 0.01, 10), ("Uranus", swe.URANUS, 0.01, 5),
+    #                 ("Neptune", swe.NEPTUNE, 0.01, 5), ("Pluto", swe.PLUTO, 0.01, 5),
+    #                 ("Rahu", swe.TRUE_NODE, 0.02, 8)]
+    # for name, pid, orb, cooldown in planet_table:
+    #     ret = calculate_return_age(pid, raw_positions1[name], birth_julian, now_julian, orb, cooldown)
+    #     returns_a.write(f"{name}: {ret:.2f} returns\n")
+    # returns_a.write(f"Ketu: {ret:.2f} returns\n")
 
     # === Section 2: Birth Chart B ===
     chart_b = io.StringIO()
@@ -998,11 +998,11 @@ def run_astrology_report(birth_date, birth_time, latitude, longitude,
         for antar, s, e in antars:
             returns_b.write(f"  - {antar}: {s.date()} to {e.date()}\n")
 
-    returns_b.write("\nPlanetary Return Ages:\n")
-    for name, pid, orb, cooldown in planet_table:
-        ret = calculate_return_age(pid, raw_positions2[name], birth_julian_b, now_julian, orb, cooldown)
-        returns_b.write(f"{name}: {ret:.2f} returns\n")
-    returns_b.write(f"Ketu: {ret:.2f} returns\n")
+    # returns_b.write("\nPlanetary Return Ages:\n")
+    # for name, pid, orb, cooldown in planet_table:
+    #     ret = calculate_return_age(pid, raw_positions2[name], birth_julian_b, now_julian, orb, cooldown)
+    #     returns_b.write(f"{name}: {ret:.2f} returns\n")
+    # returns_b.write(f"Ketu: {ret:.2f} returns\n")
 
     # === Section 3: Composite Chart ===
     composite = io.StringIO()
