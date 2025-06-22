@@ -5,3 +5,4 @@ pyswisseph
 beautifulsoup4
 requests
 gunicorn
+ephem
