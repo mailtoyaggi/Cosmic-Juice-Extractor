@@ -900,10 +900,6 @@ def main():
 
     print("Astrology report created in memory.")
 
-    # Send the file via Telegram
-    bot_token = "7894298053:AAHoc_--dCUAHZgouMAO1m1yE8EeBXPN0qU"
-    chat_id = "7770439050"
-    send_telegram_file(bot_token, chat_id, file_content)
 
 if __name__ == "__main__":
     main()
